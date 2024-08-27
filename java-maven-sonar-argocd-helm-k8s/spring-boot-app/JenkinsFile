@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'vijayarajult2/endtoend:v1'
+      image 'vijayarajult2/ultimate:v2'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -31,7 +31,7 @@ pipeline {
     }
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "vijayarajult2/endtoend:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "vijayarajult2/ultimate:${BUILD_NUMBER}"
         // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
         REGISTRY_CREDENTIALS = credentials('docker-cred')
       }
