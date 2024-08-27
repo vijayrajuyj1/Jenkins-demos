@@ -58,6 +58,16 @@ pipeline {
       }
     }
 
+    stage('Run Docker Container') {
+      steps {
+        script {
+          echo "Running Docker container from image ${DOCKER_IMAGE}..."
+          def container = docker.image("${DOCKER_IMAGE}").run("-d -p 8080:8080")
+          echo "Running container ${container.id}"
+        }
+      }
+    }
+
     stage('Update Deployment File') {
       steps {
         echo 'Updating the Kubernetes deployment file with the new image tag...'
